@@ -11,6 +11,9 @@ import sqlite3
 import xlwt
 
 
+findlink = re.compile(r'<a href="(.*?)">')
+
+
 # 得到一个指定网页的内容
 def askUrl(url):
     headers = {
@@ -22,7 +25,7 @@ def askUrl(url):
     try:
         response = urllib.request.urlopen(request)
         html = response.read().decode("utf-8")
-        print(html)
+        # print(html)
     except urllib.error.URLError as e:
         if hasattr(e, "code"):
             print(e.code)
@@ -33,14 +36,26 @@ def askUrl(url):
 
 def gatData(baseurl):
     datalist = []
-    for i in range(0, 10):
+    for i in range(0, 1):
         url = baseurl + str(i * 25)
         html = askUrl(url)
+
+        soup = BeautifulSoup(html, "html.parser")
+        # print(soup)
+        for item in soup.find_all("div", class_="item"):
+            print(item)
+            item = str(item)
+            link = re.findall(findlink, item)[0]
+            # print(link)
+
+
+    return datalist
 
 
 def main():
     baseurl = "https://movie.douban.com/top250?start="
-    askUrl(baseurl)
+    datalist = gatData(baseurl)
+    savapath = ".\\doubanTop250.xls"
 
 
 if __name__ == "__main__":
