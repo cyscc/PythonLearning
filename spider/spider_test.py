@@ -10,7 +10,6 @@ from urllib import *
 import sqlite3
 import xlwt
 
-
 findlink = re.compile(r'<a href="(.*?)">')
 
 
@@ -47,7 +46,6 @@ def gatData(baseurl):
             item = str(item)
             link = re.findall(findlink, item)[0]
             # print(link)
-
 
     return datalist
 
