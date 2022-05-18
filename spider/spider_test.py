@@ -67,7 +67,7 @@ def gatData(baseurl):
             data.append(imgSrc)
             # 提取影片片名，加入data
             titles = re.findall(findTitle, item)
-            if len(titles) == 2:
+            if len(titles) == 2:        # 如果影片存在外语名，则存入，否则值为空
                 ctitle = titles[0]
                 data.append(ctitle)
                 otitle = titles[1].replace("/", "")
@@ -89,9 +89,9 @@ def gatData(baseurl):
                 data.append(inq[0].replace("。", ""))
             # 提取影片相关内容，加入data
             bd = re.findall(findBD, item)[0]
-            bd = re.sub('<br(\s+)?/>(\s+)?', " ", bd)
-            bd = re.sub('/', " ", bd)
-            data.append(bd.strip())
+            bd = re.sub('<br(\s+)?/>(\s+)?', " ", bd)       # 替换 ’换行‘ 为空格
+            bd = re.sub('/', " ", bd)                   # 替换 ’/‘ 为空格
+            data.append(bd.strip())                 # 删除bd结尾的空格
             # 将一个影片的data添加到datalist中
             datalist.append(data)
     return datalist
