@@ -7,7 +7,6 @@ import urllib.request
 from bs4 import BeautifulSoup
 import re
 from urllib import *
-import sqlite3
 import xlwt
 
 # 利用正则表达式来获取字符串中匹配到的值
@@ -29,7 +28,7 @@ findBD = re.compile(r'<p class="">(.*?)</p>', re.S)
 
 # 得到一个指定网页的内容
 def askUrl(url):
-    # 模拟主机发出的请求头信息
+    # 模拟客户端发出的请求头信息
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39 "
